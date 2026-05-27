@@ -1,4 +1,4 @@
-FROM python:3.10-slim
+FROM python:3.11-slim
 
 WORKDIR /app
 
@@ -7,5 +7,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-# Run the app using gunicorn and bind to the port Hugging Face uses (7860)
-CMD ["gunicorn", "-b", "0.0.0.0:7860", "app:app"]
+CMD gunicorn -b 0.0.0.0:${PORT:-8000} app:app
